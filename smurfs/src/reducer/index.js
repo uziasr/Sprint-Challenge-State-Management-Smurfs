@@ -19,7 +19,7 @@ const reducer = (state=initialState, action)=>{
             ...state,
             isFetching: false,
             error: '',
-            smurfs: [action.payload]
+            smurfs: [...state.smurfs,...action.payload]
           };
         case FETCH_FAILURE:
           return {

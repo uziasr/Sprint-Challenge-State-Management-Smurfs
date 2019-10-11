@@ -14,14 +14,15 @@ export const fetchSmurfs = () => dispatch => {
       .get(
         'http://localhost:3333/smurfs'
       )
-      .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data.message }))
+      .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data }))
       .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
   };
 
-export const postSmurfs = (dispatch) =>{
+export const postSmurfs = (smurf) => dispatch =>{
+    console.log(smurf)
     dispatch({type:START_POST});
     axios
-    .post('http://localhost:3333/smurfs')
-    .then(res=>console.log(res))
-    .catch(err=>console.log(err))
+    .post('http://localhost:3333/smurfs/',smurf)
+    .then(res=>console.log('res',res))
+    .catch(err=>console.log('error',err.response.data))
 }

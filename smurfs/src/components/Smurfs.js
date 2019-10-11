@@ -1,12 +1,35 @@
-import React from 'react';
+import React, {useEffect}from 'react';
 import {connect} from 'react-redux'
+import {fetchSmurfs, postSmurfs} from '../actions/index'
 
 const Smurfs = (props) => {
     console.log(props)
+    useEffect(()=>{
+        props.fetchSmurfs()
+    },[])
+
+    const newSmurf = {
+        name: "Sleepy",
+        age: 200,
+        height: "5cm",
+        id: 1
+      }
+    useEffect(()=>{
+        props.postSmurfs(newSmurf)
+    },[])
+
+
     return (
-        <div>
-            <h1>Hello</h1>
-        </div>
+        props.smurfs.map(smurf=>{
+            return (
+                
+                <div key={smurf.id}>
+                    <p>{smurf.name}</p>
+                    <p>{smurf.age}</p>
+                    <p>{smurf.height}</p>
+                </div>
+            )
+        })
     );
 };
 
@@ -18,4 +41,4 @@ const mapStateToProps = (state) =>{
 } 
 
 
-export default connect(mapStateToProps,{})(Smurfs);
+export default connect(mapStateToProps,{fetchSmurfs,postSmurfs})(Smurfs);
