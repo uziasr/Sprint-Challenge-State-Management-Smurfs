@@ -2,6 +2,7 @@ import React, {useEffect}from 'react';
 import {connect} from 'react-redux'
 import {fetchSmurfs, postSmurfs} from '../actions/index'
 import styled from 'styled-components'
+import SmurfForm from './SmurfForm'
 
 const SmurfWrap = styled.div`
 display:flex;
@@ -19,31 +20,31 @@ const Smurfs = (props) => {
         props.fetchSmurfs()
     },[])
 
-    const newSmurf = {
-        name: "Sleepy",
-        age: 200,
-        height: "5cm",
-        id: 1
-      }
-    useEffect(()=>{
-        props.postSmurfs(newSmurf)
-    },[])
+    // const newSmurf = {
+    //     name: "Sleepy",
+    //     age: 200,
+    //     height: "5cm",
+    //     id: 1
+    // }
 
 
     return (
-        <SmurfWrap>
-            
-           { props.smurfs.map(smurf=>{
-                return (
-                    
-                    <div key={smurf.id}>
-                        <h3>{smurf.name}</h3>
-                        <h3>{smurf.age}</h3>
-                        <h3>{smurf.height}</h3>
-                    </div>
-                )
-            })}
-        </SmurfWrap>
+       <div>
+            <SmurfWrap>
+                
+               { props.smurfs.map(smurf=>{
+                    return (
+                        
+                        <div key={smurf.id}>
+                            <h3>{smurf.name}</h3>
+                            <h3>{smurf.age}</h3>
+                            <h3>{smurf.height}</h3>
+                        </div>
+                    )
+                })}
+            </SmurfWrap>
+            <SmurfForm postSmurfs={props.postSmurfs}/>
+       </div>
     );
 };
 
